@@ -1,0 +1,187 @@
+{% extends "UserBase.html" %}
+
+{% block title %}登陆注册{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="content-wrapper">
+
+            {#            左侧的导航栏切换#}
+            <div class="nav">
+                <div class="logo">
+                    <img src="../static/img/透明版本.png" alt="">
+                </div>
+                <div class="nav-item" id="nav-sigin-btn">
+                    <img src="../static/asset/sigin.png" alt="">
+                    <span>Sigin</span>
+                    <div class="block"></div>
+                </div>
+                <div class="nav-item" id="nav-sigup-btn">
+                    <img src="../static/asset/signup.png" alt="">
+                    <span>SigUp</span>
+                    <div class="block"></div>
+                </div>
+            </div>
+
+            <div class="center">
+                <div class="sigin-img-wrapper">
+                    <div class="img-tips">
+                        <h1>登陆 Login</h1>
+                    </div>
+                </div>
+                <div class="sigup-img-wrapper">
+                    <div class="img-tips">
+                        <h1>注册 Register</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form">
+                <div class="form-wrapper">
+
+                    <div class="sigin common-style">
+
+                        <div class="title">
+                            <span>Don't have an account?</span>
+                            <span>Sign Up.</span>
+                        </div>
+
+                        {#   用户登陆时的表单#}
+                        <form method="POST">
+                            <div class="inputs-wrapper">
+                                {#                                登陆账户#}
+                                <div class="inputs-item items-email">
+                                    <span class="input-tips">E-mail</span>
+                                    <input type="email" class="inputs" aria-describedby="emailHelp" name="email">
+                                </div>
+                                {#                                登陆密码#}
+                                <div class="inputs-item items-pwd">
+                                    <span class="input-tips">Password</span>
+                                    <input type="password" name="password" class="inputs">
+                                </div>
+                                {#  点击按钮：登陆#}
+                                {# Submit将表单提交(form.submit())作为其onclick后的默认事件#}
+                                <button class="sigin-btn" type="submit">SIGN IN</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                    <div class="sigup common-style">
+                        <form method="POST" action="{{ url_for('auth.handle_register') }}">
+                            <div class="inputs-wrapper">
+
+                                {#                                注册邮箱#}
+                                <div class="inputs-item items-email animations">
+                                    <span class="input-tips">E-mail</span>
+                                    <input type="email" class="inputs" name="registeremail">
+                                </div>
+
+                                {#                                邮箱验证码#}
+                                <div class="inputs-item items-emailcheck animations">
+                                        <span class="input-tips">邮箱验证码
+                                            <button class="btn-grad" type="button" id="captcha-btn"
+                                                    style="margin-bottom:5px;">Get here</button></span>
+                                    <input type="text" class="inputs" name="captcha">
+                                </div>
+
+                                {#                                注册用户名#}
+                                <div class="inputs-item items-user animations">
+                                    <span class="input-tips">User name</span>
+                                    <input type="text" class="inputs" name="username">
+                                </div>
+
+                                {#                                注册密码#}
+                                <div class="inputs-item items-pwd animations">
+                                    <span class="input-tips">Password</span>
+                                    <input type="password" class="inputs" name="password">
+                                </div>
+
+                                {#                                确认密码#}
+                                <div class="inputs-item items-pwd animations">
+                                    <span class="input-tips">check Password</span>
+                                    <input type="password" class="inputs" name="password_confirm">
+                                </div>
+
+                                {#                                确认注册#}
+                                <button type="submit" class="sigin-btn animations">SIGN IN</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block back %}
+    <script>
+        const siginBtn = document.getElementById('nav-sigin-btn');
+        const sigupBtn = document.getElementById('nav-sigup-btn');
+        const siginForm = document.querySelector('.sigin');
+        const sigupForm = document.querySelector('.sigup');
+        const siginImgWrapper = document.querySelector('.sigin-img-wrapper');
+        const sigupImgWrapper = document.querySelector('.sigup-img-wrapper');
+        const animations = document.querySelectorAll('.animations');
+        const nav = document.querySelector('.nav');
+        const form = document.querySelector('.form');
+        const center = document.querySelector('.center');
+
+        let flag = true;
+        sigupBtn.onclick = function () {
+            if (flag) {
+                flag = false;
+                siginForm.style.top = '140%';
+                siginImgWrapper.style.transform = 'translateY(-100%)';
+                sigupImgWrapper.style.transform = 'translateY(-100%)';
+                nav.classList.add('nav-form-animation-bottom');
+                form.classList.add('nav-form-animation-bottom');
+                nav.classList.remove('nav-form-animation-top');
+                form.classList.remove('nav-form-animation-top');
+                setTimeout(function () {
+                    sigupForm.style.zIndex = '1';
+                    sigupForm.style.top = '50%';
+                    for (let i = 0; i < animations.length; i++) {
+                        setTimeout(function () {
+                            animations[i].style.transition = '1s';
+                            animations[i].style.opacity = '1';
+                            animations[i].style.transform = 'translate(0, 0)';
+                            if (i == animations.length - 3) {
+                                flag = true;
+                            }
+                        }, i * 250)
+                    }
+                }, 500)
+            }
+        }
+
+        siginBtn.onclick = function () {
+            if (flag) {
+                flag = false;
+                siginForm.style.top = '50%';
+                sigupForm.style.transition = '1s';
+                sigupForm.style.top = '-100%';
+                siginImgWrapper.style.transform = 'translateY(0%)';
+                sigupImgWrapper.style.transform = 'translateY(0%)';
+                nav.classList.remove('nav-form-animation-bottom');
+                form.classList.remove('nav-form-animation-bottom');
+                nav.classList.add('nav-form-animation-top');
+                form.classList.add('nav-form-animation-top');
+                flag = true
+                setTimeout(function () {
+                    sigupForm.style.zIndex = '-1';
+                    for (let i = 0; i < animations.length; i++) {
+                        animations[i].style.transition = '0';
+                        animations[i].style.opacity = '0';
+                        animations[i].style.transform = 'translate(-10%, 0)';
+                    }
+                    sigupForm.style.top = '-50%';
+                }, 1000)
+            }
+        }
+    </script>
+{% endblock %}

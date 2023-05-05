@@ -1,0 +1,102 @@
+{% extends "TestBase.html" %}
+
+{% block title %}检测结果{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.3.6.min.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <section id="home">
+        <div class="a2V a2W a2X dark:a2Y[#3c3e56] dark:a2Z a3b[20px] a2U a3c 2xl:a3d[60px] a3e lg:a3f">
+            <div class="ab">
+                <div class="a6 a1K a7 ac">
+                    <div class="a5 lg:a2u/2 af">
+
+                        <div class="a3g lg:a3h aJ[800px] wow fadeInUp" data-wow-delay=".2s" style="padding:0 80px;">
+                            <h1 class="a25 a1j dark:a1k a2_ md:a30[45px] a31 md:a31 a1O"
+                                style="font-size: 30px; color: #cab6db">检测结果：
+                                <span class="a25 aR aT a3i"
+                                      style="margin-top:-5px;font-size: 18px; font-weight: bold; width: 380px; border: rgba(194,185,204,0.68) solid 4px; border-radius: 12px; padding: 5px 25px; background-color: rgb(245,245,245,0.3)">{{ result }}</span>
+                            </h1>
+
+                            {#  <p class="a25 aR aT a3i">Uploading voice and text files.</p>#}
+                            <p class="a2x a1Y a1j dark:a1k"
+                               style="font-size: 15px; width:550px;font-weight: normal; margin-top: 40px; border: rgba(194,185,204,0.68) solid 5px; border-radius: 20px; padding: 15px; background-color: rgb(245,245,245,0.3)">
+                                {{ advice|safe }}
+                            </p>
+                            {#  点击进入详细分析的紫色按钮#}
+                            <div style="text-align: center">
+                                <a href="{{ url_for('test.testDetail') }}"
+                                   class="aR a2x a1k a1q a1N aF a3j a1t hover:a1u a3k"
+                                   style="margin-top:-20px;text-decoration:none;" onclick="b()">
+                                    点击获取详细分析
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# 屏幕右侧的图片布局#}
+                    <div class="a5 lg:a2u/2 af">
+
+                        <div class="a2g ae a2d aA[532px] wow fadeInUp" data-wow-delay=".25s">
+
+                            <div id="parent">
+                                <span class="ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[350px] a5 aA[350px] a0 dark:a1 a3n dark:a3n a3o a1A"></span>
+                                <img src="{{ url_for('static', filename='img/Detail_analysis.png') }}" alt="hero-image"
+                                     class="ah a2f heart-img" id="node">
+                                <span class="ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[450px] a5 aA[450px] a0 dark:a1 a3n dark:a3n a3o a1A"></span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block script %}
+    {# script代码内容#}
+    <script>
+        //在parent节点尾部添加节点
+        function b() {
+            var parent = document.getElementById("parent"); //获得parent这个动结点
+            var node = document.getElementById("node");
+            parent.removeChild(node);
+
+            let box = document.createElement('div');
+            box.className = 'loader-wrapper';
+
+            let box_content = document.createElement('div');
+            box_content.className = 'container';
+
+            let ex1 = document.createElement('div');
+            ex1.className = 'ex';
+            let ex2 = document.createElement('div');
+            ex2.className = 'ex';
+            let ex3 = document.createElement('div');
+            ex3.className = 'ex';
+            let ex4 = document.createElement('div');
+            ex4.className = 'ex';
+
+            let h1 = document.createElement('h1');
+            h1.className = 'loading';
+            h1.innerText = '进一步详细分析中...';
+
+            parent.appendChild(box);  //放入parent结点
+            box.appendChild(box_content);
+            box_content.appendChild(ex1);
+            box_content.appendChild(ex2);
+            box_content.appendChild(ex3);
+            box_content.appendChild(ex4);
+            box_content.appendChild(h1);
+        }
+
+
+    </script>
+
+{% endblock %}

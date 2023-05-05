@@ -1,0 +1,80 @@
+{% extends "QuestionBase.html" %}
+
+{% block title %}联系我们{% endblock %}
+
+{% block content %}
+     <section id="contact" class="av[10px] a1M" style="background-image:linear-gradient(to right, #ECE9E6 0%, #FFFFFF  51%, #ECE9E6  100%);padding:30px;">
+            <div class="ab">
+                <div class="a6 a1p ac">
+                    <div class="a5 af">
+                        <div class="wow fadeInUp" data-wow-delay=".2s">
+                            <h2 class="a1X a3q"  style="margin:0px;">
+                                Seek for More Help
+                            </h2>
+                            <p class="a25 aR aT" style="padding:20px;">
+                                Contact us by filling the table below. We will reply as soon as possible and give you the appropriate advice and help.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="aJ[770px] a2f a4t a4d ae a0 dark:a1 a2d wow fadeInUp" data-wow-delay=".3s">
+                    <div class="a3V a3W sm:a4u[40px] a0 dark:aC a4d a2C a4v dark:a4w">
+
+                        <form action="#" method="POST">
+                            <div class="a6 a1K ac">
+                                <div class="a5 md:a2u/2 af">
+                                    <div class="a3u">
+                                        <label for="" class="al a25 aR a1j dark:a1k a2j" style="color: #5B5B5B;">真实姓名</label>
+                                        <input type="text" placeholder="Enter your first name" name="name"
+                                               class="a5 a25 a1i aT av[14px] a3X aw a2C a4v dark:a4w aK dark:a1 a2E a4x focus-visible:aN focus:a2F">
+                                    </div>
+                                </div>
+                                <div class="a5 md:a2u/2 af">
+                                    <div class="a3u">
+                                        <label for="" class="al a25 aR a1j dark:a1k a2j" style="color: #5B5B5B;">联系电话</label>
+                                        <input type="text" placeholder="Enter your telephone" name="tele_num"
+                                               class="a5 a25 a1i aT av[14px] a3X aw a2C a4v dark:a4w aK dark:a1 a2E a4x focus-visible:aN focus:a2F">
+                                    </div>
+                                </div>
+
+                                <div class="a5 af">
+                                    <div class="a2e">
+                                        <label for="" class="al a25 aR a1j dark:a1k a2j" style="color: #5B5B5B;">What are you looking for?</label>
+                                        <textarea rows="5" placeholder="Enter your message" name="content"
+                                                  class="a5 a25 a1i aT av[14px] a3X aw a2C a4v dark:a4w aK dark:a1 a2E a4x focus-visible:aN focus:a2F a4y"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="a5 af">
+                                    <div class="a2g"><button class="btn-grad btn-wider">  提  交  </button></div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+{% endblock %}
+
+
+{% block href %}
+    {# 搜索问答#}
+
+    <li>
+        <a href="{{ url_for('qa.postQuestion') }}" :class="scrolledFromTop ? 'aj lg:aP' : 'aj lg:aQ' "
+           class="scroll-menu aR aS aT hover:aU lg:aV a6 lg:aW xl:aX">
+            发布你的困惑
+        </a>
+    </li>
+
+    <li>
+        <a :class="scrolledFromTop ? 'aj lg:aP' : 'aj lg:aQ' "
+           class="scroll-menu aR aS aT hover:aU lg:aV a6 lg:aW xl:aX"
+           href="{{ url_for('qa.displayQuestion') }}">
+            解答他人困惑
+        </a>
+    </li>
+
+{% endblock %}

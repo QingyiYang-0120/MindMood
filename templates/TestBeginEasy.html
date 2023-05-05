@@ -1,0 +1,137 @@
+{% extends "TestBase.html" %}
+
+{% block title %}开始测试{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.3.6.min.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <section id="home">
+        <div class="a2V a2W a2X dark:a2Y[#3c3e56] dark:a2Z a3b[20px] a2U a3c 2xl:a3d[60px] a3e lg:a3f" id="child">
+            <div class="ab">
+                <div class="a6 a1K a7 ac">
+                    <div class="a5 lg:a2u/2 af">
+
+                        <div class="a3g lg:a3h aJ[470px] wow fadeInUp" data-wow-delay=".2s" style="padding:0 80px;">
+                            <h1 class="a25 a1j dark:a1k a2_ md:a30[45px] a31 md:a31 a1O"
+                                style="font-size: 32px; color: #cab6db; width:400px;">
+                                简易、快速版抑郁测试
+                            </h1>
+                            <p class="a25 aR aT a3i"
+                               style="font-size: 18px; font-weight: bold; color:rgb(132, 94, 238); width:450px;">
+                                请输入一段你近期的写的文案（如朋友圈、QQ空间等）,或输入当下想说的话（20-50字最佳）
+                            </p>
+                            {#                            在线录制音频和记录文本Data -> Click here#}
+                            <h1 class="a25 aR aT a3i"
+                                style="font-size: 18px; font-weight: 500; width: 400px;margin-bottom: 20px;">
+
+                                <p style="margin-top: 10px;font-size:18px;">
+                                    (1) 依据该文段检测<span style="color:#FFB6C1;">是否具有抑郁情感倾向</span></p>
+                                <p style="margin-top: 10px;font-size:18px;">
+                                    (2) 并且提供该文段的<span style="color:#FFB6C1;">情感词统计分布</span></p>
+
+                                <form action="{{ url_for('test.easytestBegin') }}" method="POST">
+                                    <textarea type="text" name="content"
+                                              style="margin:20px 0px;width:400px;padding:10px; height:150px; border-radius:10px;border: 1px solid #ccc; padding: 5px; font-size: 16px;"></textarea>
+                                    <button class="widthsmall a2x a1k a1q a1N aF a3j a1t hover:a1u a3k" type="submit"
+                                            onclick="b()"
+                                            style='text-align:center;background-color: #cab6db;text-decoration:none;margin-bottom:10px;padding: 5px 75px;border-radius: 8px;'>
+                                        提交文段，进行简易版测试
+                                    </button>
+                                </form>
+
+                            </h1>
+
+                        </div>
+                    </div>
+                    <div class="a5 lg:a2u/2 af">
+
+
+                        <div class="a2g ae a2d aA[532px] wow fadeInUp" data-wow-delay=".25s" id="pparent">
+
+
+                            <div id="parent">
+                                <span id="circle1"
+                                      class="ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[350px] a5 aA[350px] a0 dark:a1 a3n dark:a3n a3o a1A"></span>
+
+                                {% if advice %}
+                                    <h1 class="a25 a1j dark:a1k a2_ md:a30[45px] a31 md:a31 a1O" id="h1"
+                                        style="font-size: 30px; color: #cab6db;padding-top:150px;">检测结果：
+                                        <span class="a25 aR aT a3i"
+                                              style="margin-top:-5px;font-size: 18px; font-weight: bold; width: 380px; border: rgba(194,185,204,0.68) solid 4px; border-radius: 12px; padding: 5px 25px; background-color: rgb(245,245,245,0.3)">{{ result }}</span>
+                                    </h1>
+                                    {#  <p class="a25 aR aT a3i">Uploading voice and text files.</p>#}
+                                    <p class="a2x a1Y a1j dark:a1k" id="p"
+                                       style="font-size: 17px; font-weight:bold;margin-left:160px;width:300px;border: rgba(194,185,204,0.68) solid 5px; border-radius: 20px; padding: 15px; background-color: rgb(245,245,245,0.3);color:grey;">
+                                        {{ advice|safe }}
+                                    </p>
+                                {% else %}
+                                    <img src="{{ url_for('static', filename='/img/heart.png') }}" alt="hero-image"
+                                         class="ah a2f heart-img up-down" id="node">
+                                {% endif %}
+
+                                <span id="circle2"
+                                      class="ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[450px] a5 aA[450px] a0 dark:a1 a3n dark:a3n a3o a1A"></span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block script %}
+    {# script代码内容#}
+    <script>
+        //在parent节点尾部添加节点
+        function b() {
+            var parent = document.getElementById("parent"); //获得parent这个动结点
+            var node = document.getElementById("node");
+            if (node) {
+                parent.removeChild(node);
+            }
+            var h1h1 = document.getElementById("h1");
+            if (h1h1) {
+                parent.removeChild(h1h1);
+            }
+            var p = document.getElementById("p");
+            if (p) {
+                parent.removeChild(p);
+            }
+
+            let box = document.createElement('div');
+            box.className = 'loader-wrapper';
+
+            let box_content = document.createElement('div');
+            box_content.className = 'container';
+
+            let ex1 = document.createElement('div');
+            ex1.className = 'ex';
+            let ex2 = document.createElement('div');
+            ex2.className = 'ex';
+            let ex3 = document.createElement('div');
+            ex3.className = 'ex';
+            let ex4 = document.createElement('div');
+            ex4.className = 'ex';
+
+            let h1 = document.createElement('h1');
+            h1.className = 'loading';
+            h1.innerText = '为您快速分析中...';
+
+            parent.appendChild(box);  //放入parent结点
+            box.appendChild(box_content);
+            box_content.appendChild(ex1);
+            box_content.appendChild(ex2);
+            box_content.appendChild(ex3);
+            box_content.appendChild(ex4);
+            box_content.appendChild(h1);
+        }
+    </script>
+
+{% endblock %}

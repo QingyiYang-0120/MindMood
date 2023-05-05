@@ -1,0 +1,69 @@
+{% extends "QuestionBase.html" %}
+
+{% block title %}评论问答{% endblock %}
+
+{% block content %}
+    <section id="home">
+        <div class="a2V a2W a2X dark:a2Y[#3c3e56] dark:a2Z a3b[20px] a2U a3c 2xl:a3d[60px] a3e lg:a3f">
+            <div class="ab">
+                {#   <div class="a6 a1K a7 ac">#}
+                <div class="row div-centre wow fadeInUp" data-wow-delay=".2s" style="margin-top: 20px;">
+                    {#   <div class="col"></div>#}
+                    <div class="col-9">
+                        <ul class="question-ul">
+
+                            {#  显示目前有的所有问题#}
+                            {% for question in questions %}
+                                <li>
+                                    {#  左边的头像#}
+                                    <div class="side-question">
+                                        <img class="side-question-avatar" src="{{ url_for('static', filename='/img/透明版本.png') }}" alt="">
+                                    </div>
+
+                                    <div class="question-main">
+                                        {#  使用 url_for() 生成动态 URL 时，将动态部分作为关键字参数传入#}
+                                        <div class="question-title"><a
+                                                href="{{ url_for('qa.qa_detail', qa_id=question.id) }}">{{ question.title }}</a>
+                                        </div>
+
+                                        <div class="question-content">{{ question.content }}</div>
+
+                                        <div class="question-detail">
+                                            <span class="question-author">发布者：{{ question.author.username }}</span>
+                                            <span class="question-time">Time：{{ question.create_time }}</span>
+                                        </div>
+                                    </div>
+
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                    {#   <div class="col"></div>#}
+                </div>
+                {#  </div>#}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block href %}
+    {# 搜索问答#}
+    <li>
+        {# 点击提交这个form的时候将这个form的数据提交给下面的url#}
+        <form class="form-inline my-2 my-lg-0 centersearch" method="GET" action="{{ url_for('qa.search') }}">
+            <input class="form-control mr-sm-2" type="search" placeholder="搜索关键字"
+                   aria-label="Search" name="q">
+            <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">
+                <img src="static/img/搜索.png" alt="logo" class="dark:am" style="width:80px">
+            </button>
+        </form>
+    </li>
+
+    <li>
+        <a href="{{ url_for('qa.postQuestion') }}" :class="scrolledFromTop ? 'aj lg:aP' : 'aj lg:aQ' "
+           class="scroll-menu aR aS aT hover:aU lg:aV a6 lg:aW xl:aX">
+            发布你的困惑
+        </a>
+    </li>
+{% endblock %}

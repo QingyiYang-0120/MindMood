@@ -1,0 +1,279 @@
+
+body {
+    background-color: rgb(255, 241, 245);
+    /*font-family:  Verdana, sans-serif, Tahoma,  Geneva;*/
+    /*font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;*/
+    /*消除下划线*/
+    text-decoration: none;
+}
+
+.btn-grad {
+    background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+    margin: -2px 0px;
+    padding: 0px 12px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 1px solid white;
+    /*display: block; 会导致换行*/
+}
+
+
+.btn-wider {
+    background-image: linear-gradient(to right, #ddd6f3 0%, #faaca8 51%, #ddd6f3 100%);
+    margin: 2px;
+    padding: 5px 25px;
+}
+
+.btn-grad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
+.white {
+    color: white;
+}
+
+.pic_width {
+    width: 280px;
+    margin: 0px;
+}
+
+.login_height {
+    padding-top: .5rem;
+    padding-bottom: .5rem
+}
+
+.questioncard {
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 20px;
+    padding: 50px 30px;
+}
+
+.heart-img {
+    width: 33%;
+    /*下面四行代码实现图像处于div的中心位置*/
+    position: absolute;
+    top: 36%;
+    left: 35%;
+    /*transform: translateX(-50%) translateY(-50%);*/
+    /*animation: changeBiger 4s linear forwards;*/
+    /*animation-delay: 5s;*/
+    /*-webkit-animation-delay: 5s;*/
+    /*transform: scale(1.08);*/
+}
+
+.question-img {
+    width: 250px;
+    /*下面四行代码实现图像处于div的中心位置*/
+    position: absolute;
+    top: 36%;
+    left: 30%;
+}
+
+.detail-img {
+    width: 100%;
+    /*下面四行代码实现图像处于div的中心位置*/
+    float: left;
+}
+
+.up-down {
+    animation: mymove 2.5s infinite;
+    -webkit-animation: mymove 2.5s infinite;
+}
+
+@keyframes mymove {
+    0% {
+        transform: translate(0px, 8px);
+    }
+    50% {
+        transform: translate(0px, -8px);
+    }
+    100% {
+        transform: translate(0px, 8px);
+    }
+}
+
+/*Safari 和 Chrome:*/
+@-webkit-keyframes mymove {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    50% {
+        transform: translate(0px, -20px);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
+.div-centre {
+    justify-content: center; /*水平居中*/
+    align-items: Center; /*垂直居中*/
+}
+
+.centersearch {
+    margin-left: -150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.input-file {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 550;
+    margin-left: 40px;
+}
+
+.submit-file {
+    margin-left: 40px;
+    margin-top: -100px;
+}
+
+/* Button CSS */
+.button-89 {
+
+    --b: 3px; /* border thickness */
+    --s: .45em; /* size of the corner */
+    --color: #373B44;
+    width: 23%;
+    float: left;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+    color: var(--color);
+    --_p: var(--s);
+    background: conic-gradient(from 90deg at var(--b) var(--b), #0000 90deg, var(--color) 0) var(--_p) var(--_p)/calc(100% - var(--b) - 2 * var(--_p)) calc(100% - var(--b) - 2 * var(--_p));
+    transition: .3s linear, color 0s, background-color 0s;
+    outline: var(--b) solid #0000;
+    outline-offset: .6em;
+    font-size: 16px;
+
+    border: 0;
+
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-89:hover, .button-89:focus-visible {
+    --_p: 0px;
+    outline-color: var(--color);
+    outline-offset: .05em;
+}
+
+.button-89:active {
+    background: var(--color);
+    color: #fff;
+}
+
+
+/* CSS */
+.button-32 {
+    background-color: #fff000;
+    border-radius: 12px;
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-align: center;
+    transition: 200ms;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-32:not(:disabled):hover,
+.button-32:not(:disabled):focus {
+    outline: 0;
+    background: #f4e603;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .2), 0 3px 8px 0 rgba(0, 0, 0, .15);
+}
+
+.button-32:disabled {
+    filter: saturate(0.2) opacity(0.5);
+    -webkit-filter: saturate(0.2) opacity(0.5);
+    cursor: not-allowed;
+}
+
+/* CSS */
+.button-33 {
+    background-color: #8B5CF6;
+    border-radius: 10px;
+    /*box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;*/
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+    padding: 7px 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+    float: right;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    font-weight: bold;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-33:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    /*box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;*/
+    /*transform: scale(1.05) rotate(-1deg);*/
+    transform: scale(1.05);
+}
+
+
+/* 弹窗样式 */
+.modal {
+    position: fixed; /* 固定定位 */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+    z-index: 999; /* 置顶显示 */
+    display: none; /* 初始状态隐藏 */
+}
+
+.modal-content {
+    width: 64rem;
+    position: absolute; /* 绝对定位 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 居中显示 */
+    background-color: #f5ebeb; /* 弹窗背景色 */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 28px;
+    font-weight:bold;
+    color: #949191;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}

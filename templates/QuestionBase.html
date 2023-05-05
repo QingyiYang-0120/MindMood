@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.4.6.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/glightbox.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/detail.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/self.css') }}">
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+        <script>new WOW().init();</script>
+        <script defer="" src="{{ url_for('static', filename='js/cdn.min.js') }}"></script>
+        {#    子模版填充标题#}
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+
+    <body x-data="{scrolledFromTop: false}"
+          x-init="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false"
+          @scroll.window="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false"
+          class="a0 dark:a1">
+
+        <header x-data="{navbarOpen: false,dropdownOpen: false}"
+                :class="scrolledFromTop ? 'a0 dark:a1 a2 dark:a2 a3 a4' : 'a0 dark:a1' "
+                class="a5 a6 a7 a8 a9 aa">
+            {#        class="a5 a6 a7 a8 a9 aa wow fadeInUp" data-wow-delay=".2s"#}
+            <div class="ab">
+                <div class="a6 ac a7 ad ae">
+                    <div class="af ag ah">
+                        <a href="/" :class="scrolledFromTop ? 'ai lg:aj' : 'ak lg:ai' " class="a5 al">
+                            <img src="{{ url_for('static', filename='/img/logoold.png') }}" alt="logo"
+                                 class="dark:am pic_width">
+                            <img src="{{ url_for('static', filename='/img/logoold.png') }}" alt="logo"
+                                 class="am dark:al pic_width">
+                        </a>
+                    </div>
+                    <div class="a6 af an a7 a5">
+                        <div>
+                            <button @click="navbarOpen = !navbarOpen" :class="navbarOpen && 'navbarTogglerActive' "
+                                    id="navbarToggler" class="al ao ap aq/2 ar/2 lg:am focus:as at au av[6px] aw">
+                                <span :class="navbarOpen && 'ax ay[7px]' "
+                                      class="ae az[30px] aA[2px] aB[6px] al aC dark:a0"></span>
+                                <span :class="navbarOpen && 'aD' "
+                                      class="ae az[30px] aA[2px] aB[6px] al aC dark:a0"></span>
+                                <span :class="navbarOpen && 'ay[-8px] aE[135deg]' "
+                                      class="ae az[30px] aA[2px] aB[6px] al aC dark:a0"></span>
+                            </button>
+                            <nav :class="!navbarOpen && 'am' " id="navbarCollapse"
+                                 class="ao aF lg:aG aH a0 dark:aC aI aw aJ[250px] a5 lg:aK dark:lg:aK lg:ah lg:a5 ap aL lg:al lg:aM lg:aN">
+                                <ul class="aO lg:a6">
+                                    <li>
+                                        <a href="/"
+                                           :class="scrolledFromTop ? 'aj lg:aP' : 'aj lg:aQ' "
+                                           class="scroll-menu aR aS aT hover:aU lg:aV a6 lg:aW xl:aX">
+                                            HomePage
+                                        </a>
+                                    </li>
+                                    {% block href %}{% endblock %}
+
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="xl:a1m sm:a6 an am a1n lg:a1o">
+                            {% if user %}
+                                {# 退出登陆的选项#}
+                                <a href="{{ url_for('auth.logout') }}"
+                                   class="a6 a7 a1p aR aS a1k a1q aw login_height a1s a1t hover:a1u">
+                                    <img src="{{ url_for('static', filename='/img/Logout.png') }}" alt="logo" class="dark:am"
+                                         style="width:25px">
+                                    <img src="{{ url_for('static', filename='/img/Logout.png') }}" alt="logo"
+                                         class="am dark:al" style="width:25px">
+                                    &nbsp; Logout
+                                </a>
+                            {% else %}
+                                <a href="{{ url_for('auth.register_login') }}"
+                                   class="a6 a7 a1p aR aS a1k a1q aw login_height a1s a1t hover:a1u">
+                                    <img src="{{ url_for('static', filename='/img/Login.png') }}" alt="logo" class="dark:am"
+                                         style="width:20px">
+                                    <img src="{{ url_for('static', filename='/img/Login.png') }}" style="width:20px">
+                                    &nbsp;&nbsp;Login
+                                </a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% block content %}{% endblock %}
+    </body>
+
+</html>

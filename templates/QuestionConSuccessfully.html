@@ -1,0 +1,69 @@
+{% extends "QuestionBase.html" %}
+
+{% block title %}联系我们{% endblock %}
+
+{% block content %}
+    <section id="contact" class="av[10px] a1M"
+             style="background-image:linear-gradient(to right, #ECE9E6 0%, #FFFFFF  51%, #ECE9E6  100%);padding:30px;">
+        <div class="ab">
+            <div class="a6 a1p ac">
+                <div class="a5 af">
+                    <div>
+                        <h2 class="a1X a3q" style="margin:0px;">
+                            Seek for More Help
+                        </h2>
+                        <p class="a25 aR aT" style="padding:20px;">
+                            Contact us by filling the table below. We will reply as soon as possible and give you the
+                            appropriate advice and help.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="aJ[770px] a2f a4t a4d ae a0 dark:a1 a2d wow fadeInUp" data-wow-delay=".3s">
+                <div class="a3V a3W sm:a4u[40px] a0 dark:aC a4d a2C a4v dark:a4w"
+                     style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 500px; margin-top: -10px">
+
+                    <div class="a3F a3G a2f a3H a1q a3I a6 a7 a1p aU group-hover:a2n group-hover:a1k a1t a28"
+                         style="background-color: transparent">
+                        <svg t="1678633969981" class="a23 icon" viewBox="0 0 1024 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="2108" width="100" height="100">
+                            <path
+                                    d="M512 27.2C244.672 27.2 27.2 244.672 27.2 512S244.672 996.8 512 996.8 996.8 779.328 996.8 512 779.328 27.2 512 27.2z m0 908.8A424.448 424.448 0 0 1 88 512 424.512 424.512 0 0 1 512 88 424.448 424.448 0 0 1 936 512 424.448 424.448 0 0 1 512 936z"
+                                    p-id="2109"></path>
+                            <path
+                                    d="M807.808 301.056a32 32 0 0 0-45.184 2.368L463.552 635.392 291.712 493.44a32 32 0 0 0-40.768 49.28L446.016 704c5.568 4.608 12.224 6.4 18.944 6.72 1.408 0.128 2.816 0.512 4.288 0.448 0.64-0.064 1.216-0.384 1.856-0.448a31.552 31.552 0 0 0 19.776-9.984l319.296-354.432a32 32 0 0 0-2.368-45.184z"
+                                    p-id="2110"></path>
+                        </svg>
+                    </div>
+                    <div class="a25 aR aT">
+                        <p style="font-weight: normal">提交成功，请等待回复</p>
+                    </div>
+                    <div class="a25 aR aT">
+                        <p style="margin-top: 10px; font-weight: normal">Submitted Successfully，please wait for reply</p>
+                    </div>
+                    <a href="/" class="a6 a7 a1p aR aS a1k a1q aw login_height a1s a1t hover:a1u" style="margin-top:60px;">返回首页</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block href %}
+    {# 搜索问答#}
+    <li>
+        <a href="{{ url_for('qa.postQuestion') }}" :class="scrolledFromTop ? 'aj lg:aP' : 'aj lg:aQ' "
+           class="scroll-menu aR aS aT hover:aU lg:aV a6 lg:aW xl:aX">
+            发布你的困惑
+        </a>
+    </li>
+    <li>
+        <a :class="scrolledFromTop ? 'aj lg:aP' : 'aj lg:aQ' "
+           class="scroll-menu aR aS aT hover:aU lg:aV a6 lg:aW xl:aX"
+           href="{{ url_for('qa.displayQuestion') }}">
+            解答他人困惑
+        </a>
+    </li>
+
+{% endblock %}

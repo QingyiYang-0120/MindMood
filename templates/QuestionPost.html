@@ -1,0 +1,62 @@
+{% extends "QuestionBase.html" %}
+
+{% block title %}发布问答{% endblock %}
+{% block content %}
+    <section id="home">
+        <div class="a2V a2W a2X dark:a2Y[#3c3e56] dark:a2Z a3b[20px] a2U a3c 2xl:a3d[60px] a3e lg:a3f">
+            <div class="ab">
+                <div class="a6 a1K a7 ac">
+                    {#                    屏幕左半边#}
+                    <div class="a5 lg:a2u/2 md:a2u xl:a2u af">
+                        <div class="row wow fadeInUp" data-wow-delay=".2s" style="margin-top: 20px;">
+                            <div class="col-12 questioncard a3t">
+                                <h1 style="text-align: center; margin-bottom:20px; color: #cab6db; font-size:25px;">
+                                    发布你的困惑</h1>
+                                {#使用html可以创建web表单，供用户填写信息，表单数据由web浏览器提交给服务器，这一过程通常使用post请求#}
+
+                                <form action="#" method="post">
+                                    <div class="form-group">
+                                        <input type="text" name="title" class="form-control" placeholder="请输入标题">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="content" class="form-control" rows="10" placeholder="请输入具体内容"></textarea>
+                                    </div>
+                                    <div class="form-group" style="text-align: right;"><button class="btn-grad btn-wider">发 布</button></div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {#                    屏幕的右半边#}
+                    <div class="a5 lg:a2u/2 af">
+                        <div class="a2g ae a2d aA[532px] wow fadeInUp" data-wow-delay=".25s">
+                            <img src="static/img/对话框3.png" alt="hero-image" class="ah a2f question-img">
+                            {#   中间的两个圆圈#}
+                            <span class="ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[350px] a5 aA[350px] a0 dark:a1 a3n dark:a3n a3o a1A"></span>
+                            <span class="ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[450px] a5 aA[450px] a0 dark:a1 a3n dark:a3n a3o a1A"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block href %}
+    <li>
+        <a :class="scrolledFromTop ? 'aj lg:aP' : 'aj lg:aQ' "
+           class="scroll-menu aR aS aT hover:aU lg:aV a6 lg:aW xl:aX"
+           href="{{ url_for('qa.displayQuestion') }}">
+            解答他人困惑
+        </a>
+    </li>
+    {#   联系我们#}
+    <li>
+        <a href="{{ url_for('qa.QuestionContact') }}" :class="scrolledFromTop ? 'aj lg:aP' : 'aj lg:aQ' "
+           class="scroll-menu aR aS aT hover:aU lg:aV a6 lg:aW xl:aX">
+            Contact Us
+        </a>
+    </li>
+{% endblock %}

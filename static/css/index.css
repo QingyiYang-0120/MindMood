@@ -1,0 +1,58 @@
+.question-ul li {
+    padding: 15px;
+    overflow: hidden;
+    display: flex;
+    background-color: #fff;
+    margin-bottom: 10px;
+    font-family: verdana, arial, sans-serif;
+    font-size: 12px;
+    border-radius: 8px;
+    border-bottom: 8px solid #eee;
+}
+
+.side-question {
+    flex-basis: 38px;
+    height: 100%;
+}
+
+.side-question-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 3px;
+}
+
+.question-main {
+    flex: 1;
+    width: 660px;
+    margin-left: 10px;
+    overflow: hidden;
+}
+
+/*显示的问题列表的问题标题样式*/
+.question-title a {
+    color: #cab6db;
+    font-size: 16px;
+    font-weight: 900;
+}
+/*显示的问题列表的发布作者样式*/
+.question-author {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/*显示的问题列表的问题内容样式*/
+.question-content {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #999999;
+}
+
+.question-detail {
+    text-align: right;
+    margin-top: 0px;
+    color: #cc9999;
+}
+
+.question-detail .question-author {
+    margin-right: 15px;
+}

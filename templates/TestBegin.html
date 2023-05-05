@@ -1,0 +1,462 @@
+{% extends "TestBase.html" %}
+
+{% block title %}开始测试{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.3.6.min.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <section id="home">
+        <div class="a2V a2W a2X dark:a2Y[#3c3e56] dark:a2Z a3b[20px] a2U a3c 2xl:a3d[60px] a3e lg:a3f" id="child">
+            <div class="ab">
+                <div class="a6 a1K a7 ac">
+                    <div class="a5 lg:a2u/2 af">
+
+                        <div class="a3g lg:a3h aJ[470px] wow fadeInUp" data-wow-delay=".2s" style="padding:0 80px;">
+                            <h1 class="a25 a1j dark:a1k a2_ md:a30[45px] a31 md:a31 a1O"
+                                style="font-size: 32px; color: #cab6db; width:400px;">
+                                上传您的语音和文本数据
+                                {#  <span class="a2x">(.wav|.txt)</span>#}
+                            </h1>
+                            <p class="a25 aR aT a3i"
+                               style="font-size: 18px; font-weight: bold; color:rgb(132, 94, 238); width:400px;">
+                                Upload your voice and text data as required
+                            </p>
+                            {#                            在线录制音频和记录文本Data -> Click here#}
+                            <h1 class="a25 aR aT a3i"
+                                style="font-size: 18px; font-weight: 500; width: 400px;margin-bottom: 20px;">
+
+                                <p style="margin-top: 10px;font-size:18px;">
+                                    (1) 上传的<span style="color:#FFB6C1;">三个</span>文件语音文件及<span
+                                        style="color:#FFB6C1">三个</span>文本文件</p>
+                                <p style="margin-top: 10px;font-size:18px;">
+                                    (2) 语音/文本分别为回答<span style="color:#FFB6C1;">正面/负面/中性</span>问题</p>
+                                <p style="margin-top: 10px;font-size:18px;">
+                                    (3) 语音文件格式(<span style="color:#FFB6C1;">.wav</span>)，文本文件格式(<span
+                                        style="color:#FFB6C1;">.txt</span>)</p>
+                                <p style="margin-top: 10px;font-size:18px;">
+                                    (4) positive.wav | netural.wav | negative.wav</p>
+                                <p style="text-indent: 50px; margin-top: 10px;margin-bottom: 20px;font-size:18px;">
+                                    positive.txt | netural.txt | negative.txt</p>
+                                <button class="widthsmall a2x a1k a1q a1N aF a3j a1t hover:a1u a3k" onclick="a()"
+                                        style='text-align:center;background-color: #cab6db;text-decoration:none;margin-bottom:10px;padding: 5px 65px;border-radius: 8px;'>
+                                    在线录制音频（生成.wav文件）
+                                </button>
+                                <button class="widthsmall a2x a1k a1q a1N aF a3j a1t hover:a1u a3k" onclick="c()"
+                                        style='text-align:center;background-color: #cab6db;text-decoration:none;margin-bottom:10px;padding: 5px 70px;border-radius: 8px;'>
+                                    在线记录文本（生成.txt文件）
+                                </button>
+                            </h1>
+
+                            {#     <p class="a25 aR aT a3i">Uploading voice and text files.</p>#}
+
+                            <div class="a6 a7">
+                                {#  将enctype属性设置为"multipart/form-data"将上传数据发送到服务器，否则仅会把文件名作为表单数据提交。#}
+                                <form action="{{ url_for('test.testBegin') }}" method="POST"
+                                      enctype="multipart/form-data">
+                                    {#     因为要提交多个文件，在文件上传字段加入multiple属性 br标签是换行符号#}
+                                    <input type="file" name="myfile" multiple class="a25 aR aT a3i input-file">
+                                    <button type="submit" name="上传文件"
+                                            style='text-align:center;text-decoration:none;' onclick="b()"
+                                            class="aR a2x a1k a1q a1N aF a3j a1t submit-file hover:a1u a3k">Submit
+                                    </button>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="a5 lg:a2u/2 af">
+                        <div class="a2g ae a2d aA[532px] wow fadeInUp" data-wow-delay=".25s" id="pparent">
+
+                            <div id="parent">
+                                <span id="circle1"
+                                      class="ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[350px] a5 aA[350px] a0 dark:a1 a3n dark:a3n a3o a1A"></span>
+                                <img src="{{ url_for('static', filename='/img/heart.png') }}" alt="hero-image"
+                                     class="ah a2f heart-img up-down" id="node">
+                                <span id="circle2"
+                                      class="ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[450px] a5 aA[450px] a0 dark:a1 a3n dark:a3n a3o a1A"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    {% if alerm %}
+        <script type="text/javascript">
+            alert("请按下方的指示要求上传相应数量、具有正确命名和格式的语音、文本文件！Upload your voice and text data [as required] !")
+        </script>
+    {% endif %}
+
+{% endblock %}
+
+{% block script %}
+    {# script代码内容#}
+    <script>
+        //在parent节点尾部添加节点
+        function a() {
+            var parent = document.getElementById("parent");
+            var node = document.getElementById("node");
+            var text = document.getElementById("text");
+            if (node) {
+                parent.removeChild(node);
+            }
+            if (text) {
+                parent.removeChild(text);
+            }
+
+            var circle1 = document.getElementById("circle1");
+            var circle2 = document.getElementById("circle2");
+
+            //将右侧的圆圈转化为方形
+            circle1.setAttribute("class", "ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[450px] a5 aA[400px] a0 dark:a1 a3n dark:a3n a3o");
+            circle2.setAttribute("class", "ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[550px] a5 aA[500px] a0 dark:a1 a3n dark:a3n a3o");
+            let box = document.createElement('div');
+            box.setAttribute("id", "audio");
+            // 整体的lable
+            let lable = document.createElement('p');
+            lable.setAttribute("class", "a25 aR aT a3i");
+            lable.setAttribute("style", "text-align:left; font-size: 16px; color:rgb(132, 94, 238);font-weight: bold; width:400px; margin:0px 0px 0px 100px;padding-top:90px;padding-bottom:20px;");
+            lable.innerText = "Tips：点击Start Now开始录音，按照录音主题给出回答后点击结束录音并下载得到对应命名的录音文件";
+
+            // positive.wav
+            let lable1 = document.createElement('p');
+            lable1.setAttribute("class", "a25 aR aT a3i");
+            lable1.setAttribute("style", "text-align:left; font-size: 16px; font-weight: bold; width:500px; margin:0px 0px 0px 100px;");
+            lable1.innerText = "(1)positive.wav：描述一件最近让你感到Positive的事情";
+            let luyin1 = document.createElement('button');
+            luyin1.setAttribute("id", "record1");
+            luyin1.setAttribute("class", "a2x a1k a1q a1N aF a3j a1t hover:a1u a3k");
+            luyin1.setAttribute("style", "font-size:14px;text-align:center;background-color:#cab6db;text-decoration:none;padding: 5px 35px;border-radius: 8px;");
+            luyin1.innerText = 'Start Now';
+            let jieshu1 = document.createElement('button');
+            jieshu1.setAttribute("id", "stop1");
+            jieshu1.innerText = '结束录音并下载';
+            jieshu1.setAttribute("class", "a2x a1k a1q a1N aF a3j a1t hover:a1u a3k");
+            jieshu1.setAttribute("style", "margin:15px 15px;font-size:14px;text-align:center;background-color:#cab6db;text-decoration:none;padding: 5px 25px;border-radius: 8px;");
+            // 定义分割线
+            let line1 = document.createElement('hr');
+            line1.setAttribute("style", "width:65%; margin:0px auto;");
+
+            // neutral.wav
+            let lable2 = document.createElement('p');
+            lable2.setAttribute("class", "a25 aR aT a3i");
+            lable2.setAttribute("style", "text-align:left; font-size: 16px; font-weight: bold; width:500px;margin:15px 0px 0px 100px;");
+            lable2.innerText = "(2)neutral.wav：描述一件最近让你感到Neutral的事情";
+            let luyin2 = document.createElement('button');
+            luyin2.setAttribute("id", "record2");
+            luyin2.innerText = 'Start Now';
+            luyin2.setAttribute("class", "a2x a1k a1q a1N aF a3j a1t hover:a1u a3k");
+            luyin2.setAttribute("style", "font-size:14px;text-align:center;background-color:#cab6db;text-decoration:none;padding: 5px 35px;border-radius: 8px;");
+            let jieshu2 = document.createElement('button');
+            jieshu2.setAttribute("id", "stop2");
+            jieshu2.innerText = '结束录音并下载';
+            jieshu2.setAttribute("class", "a2x a1k a1q a1N aF a3j a1t hover:a1u a3k");
+            jieshu2.setAttribute("style", "margin:15px 15px;font-size:14px;text-align:center;background-color:#cab6db;text-decoration:none;padding: 5px 25px;border-radius: 8px;");
+
+            // 定义分割线
+            let line2 = document.createElement('hr');
+            line2.setAttribute("style", "width:65%; margin:0px auto;");
+
+            // negative.wav
+            let lable3 = document.createElement('p');
+            lable3.setAttribute("class", "a25 aR aT a3i");
+            lable3.setAttribute("style", "text-align:left; font-size: 16px; font-weight: bold; width:500px;margin:15px 0px 0px 100px;");
+            lable3.innerText = "(3)negative.wav：描述一件最近让你感到Negative的事情";
+            let luyin3 = document.createElement('button');
+            luyin3.setAttribute("id", "record3");
+            luyin3.innerText = 'Start Now';
+            luyin3.setAttribute("class", "a2x a1k a1q a1N aF a3j a1t hover:a1u a3k");
+            luyin3.setAttribute("style", " font-size:14px;text-align:center;background-color:#cab6db;text-decoration:none;padding: 5px 35px;border-radius: 8px;");
+            let jieshu3 = document.createElement('button');
+            jieshu3.setAttribute("id", "stop3");
+            jieshu3.innerText = '结束录音并下载';
+            jieshu3.setAttribute("class", "a2x a1k a1q a1N aF a3j a1t hover:a1u a3k");
+            jieshu3.setAttribute("style", "margin:15px 15px;font-size:14px;text-align:center;background-color:#cab6db;text-decoration:none;padding: 5px 25px;border-radius: 8px;");
+
+            // 定义分割线
+            let line3 = document.createElement('hr');
+            line3.setAttribute("style", "width:65%; margin:0px auto;");
+
+            //动态加载入parent结点
+            parent.appendChild(box);
+            box.appendChild(lable);
+
+            box.appendChild(lable1);
+            box.appendChild(luyin1);
+            box.appendChild(jieshu1);
+            box.appendChild(line1);
+
+            box.appendChild(lable2);
+            box.appendChild(luyin2);
+            box.appendChild(jieshu2);
+            box.appendChild(line2);
+
+            box.appendChild(lable3);
+            box.appendChild(luyin3);
+            box.appendChild(jieshu3);
+            box.appendChild(line3);
+
+            // 绑定开始录音与结束录音下载录音的6个监听事件
+            document.getElementById('record1').addEventListener('click', startRecording);
+            document.getElementById('stop1').addEventListener('click', stopRecording1);
+
+            document.getElementById('record2').addEventListener('click', startRecording);
+            document.getElementById('stop2').addEventListener('click', stopRecording2);
+
+            document.getElementById('record3').addEventListener('click', startRecording);
+            document.getElementById('stop3').addEventListener('click', stopRecording3);
+        }
+
+        //在parent节点尾部添加节点
+        function b() {
+            var parent = document.getElementById("parent"); //获得parent这个动结点
+            var node = document.getElementById("node");
+            var text = document.getElementById("text");
+            var audio = document.getElementById("audio");
+            if (node) {
+                parent.removeChild(node);
+            }
+            if (text) {
+                parent.removeChild(text);
+            }
+            if (audio) {
+                parent.removeChild(audio);
+            }
+            let box = document.createElement('div');
+            box.className = 'loader-wrapper';
+
+            let box_content = document.createElement('div');
+            box_content.className = 'container';
+
+            let ex1 = document.createElement('div');
+            ex1.className = 'ex';
+            let ex2 = document.createElement('div');
+            ex2.className = 'ex';
+            let ex3 = document.createElement('div');
+            ex3.className = 'ex';
+            let ex4 = document.createElement('div');
+            ex4.className = 'ex';
+
+            let h1 = document.createElement('h1');
+            h1.className = 'loading';
+            h1.innerText = '正在为您分析中...';
+
+            parent.appendChild(box);  //放入parent结点
+            box.appendChild(box_content);
+            box_content.appendChild(ex1);
+            box_content.appendChild(ex2);
+            box_content.appendChild(ex3);
+            box_content.appendChild(ex4);
+            box_content.appendChild(h1);
+        }
+
+        function c() {
+            var parent = document.getElementById("parent"); //获得parent这个动结点
+            var node = document.getElementById("node");
+            var audio = document.getElementById("audio");
+            if (node) {
+                parent.removeChild(node);
+            }
+            if (audio) {
+                parent.removeChild(audio);
+            }
+
+            var circle1 = document.getElementById("circle1");
+            var circle2 = document.getElementById("circle2");
+
+            //将右侧的圆圈转化为方形
+            circle1.setAttribute("class", "ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[450px] a5 aA[450px] a0 dark:a1 a3n dark:a3n a3o");
+            circle2.setAttribute("class", "ao a2i aq/2 a3l/2 a3m/2 ar/2 aJ[550px] a5 aA[550px] a0 dark:a1 a3n dark:a3n a3o");
+
+            let box = document.createElement('div');
+            box.setAttribute("id", "text");
+
+            // 整体的lable
+            let lable = document.createElement('p');
+            lable.setAttribute("class", "a25 aR aT a3i");
+            lable.setAttribute("style", "text-align:left; font-size: 16px; color:rgb(132, 94, 238);font-weight: bold; width:400px; margin:0px 0px 0px 100px;padding-top:55px;padding-bottom:20px;");
+            lable.innerText = "Tips：按照问题主题，在文本框内输入对应文字回答后点击Download as .txt file得到对应命名的文本文件";
+
+            // positive.wav
+            let lable1 = document.createElement('p');
+            lable1.setAttribute("class", "a25 aR aT a3i");
+            lable1.setAttribute("style", "text-align:left; font-size: 16px; font-weight: bold; width:500px; margin:0px 0px 0px 100px;");
+            lable1.innerText = "(1)positive.txt：描述一件最近让你感到Positive的事情";
+            let text1 = document.createElement('textarea');
+            text1.setAttribute("style", "font-size:14px;font-weight:bold;color:#b3b3b3;margin-left:40px;margin-top:10px;padding:0px 10px");
+            text1.setAttribute("id", "input-text1");
+            text1.setAttribute("rows", "3");
+            text1.setAttribute("cols", "35");
+            let down1 = document.createElement('button');
+            down1.setAttribute("onclick", "downloadText1()");
+            down1.setAttribute("class", "a2x a1k a1q a1N aF a3j a1t hover:a1u a3k");
+            down1.setAttribute("style", "margin-left:10px;font-size:12px;text-align:center;background-color:#cab6db;text-decoration:none;padding: 5px 10px;border-radius: 8px;");
+            down1.innerText = 'Download';
+            let line1 = document.createElement('hr');
+            line1.setAttribute("style", "width:65%; margin:0px auto;");
+
+            // neutral.wav
+            let lable2 = document.createElement('p');
+            lable2.setAttribute("class", "a25 aR aT a3i");
+            lable2.setAttribute("style", "text-align:left; font-size: 16px; font-weight: bold; width:500px;margin:15px 0px 0px 100px;");
+            lable2.innerText = "(2)neutral.txt：描述一件最近让你感到Neutral的事情";
+            let text2 = document.createElement('textarea');
+            text2.setAttribute("style", "font-size:14px;font-weight:bold;color:#b3b3b3;margin-left:40px;margin-top:10px;padding:0px 10px");
+            text2.setAttribute("id", "input-text2");
+            text2.setAttribute("rows", "3");
+            text2.setAttribute("cols", "35");
+            let down2 = document.createElement('button');
+            down2.setAttribute("onclick", "downloadText2()");
+            down2.setAttribute("class", "a2x a1k a1q a1N aF a3j a1t hover:a1u a3k");
+            down2.setAttribute("style", "margin-left:10px;font-size:12px;text-align:center;background-color:#cab6db;text-decoration:none;padding: 5px 10px;border-radius: 8px;");
+            down2.innerText = 'Download';
+            let line2 = document.createElement('hr');
+            line2.setAttribute("style", "width:65%; margin:0px auto;");
+
+            // negative.wav
+            let lable3 = document.createElement('p');
+            lable3.setAttribute("class", "a25 aR aT a3i");
+            lable3.setAttribute("style", "text-align:left; font-size: 16px; font-weight: bold; width:500px;margin:15px 0px 0px 100px;");
+            lable3.innerText = "(3)negative.txt：描述一件最近让你感到Negative的事情";
+            let text3 = document.createElement('textarea');
+            text3.setAttribute("style", "font-size:14px;font-weight:bold;color:#b3b3b3;margin-left:40px;margin-top:10px;padding:0px 10px");
+            text3.setAttribute("id", "input-text3");
+            text3.setAttribute("rows", "3");
+            text3.setAttribute("cols", "35");
+            let down3 = document.createElement('button');
+            down3.setAttribute("onclick", "downloadText3()");
+            down3.setAttribute("class", "a2x a1k a1q a1N aF a3j a1t hover:a1u a3k");
+            down3.setAttribute("style", "margin-left:10px;font-size:12px;text-align:center;background-color:#cab6db;text-decoration:none;padding: 5px 10px;border-radius: 8px;");
+            down3.innerText = 'Download';
+            let line3 = document.createElement('hr');
+            line3.setAttribute("style", "width:65%; margin:0px auto;");
+
+            //动态加载入parent结点
+            parent.appendChild(box);
+            box.appendChild(lable);
+
+            box.appendChild(lable1);
+            box.appendChild(text1);
+            box.appendChild(down1);
+            {#box.appendChild(line1);#}
+
+            box.appendChild(lable2);
+            box.appendChild(text2);
+            box.appendChild(down2);
+            {#box.appendChild(line2);#}
+
+            box.appendChild(lable3);
+            box.appendChild(text3);
+            box.appendChild(down3);
+            {#box.appendChild(line3);#}
+        }
+
+        var audioStream;
+        var audioRecorder;
+        var audioChunks = [];
+
+        function startRecording() {
+            navigator.mediaDevices.getUserMedia({audio: true})
+                .then(function (stream) {
+                    audioStream = stream;
+                    audioRecorder = new MediaRecorder(audioStream);
+                    audioRecorder.ondataavailable = function (event) {
+                        audioChunks.push(event.data);
+                    }
+                    audioRecorder.start();
+                });
+        }
+
+        function stopRecording1() {
+            audioRecorder.stop();
+            audioStream.getTracks().forEach(function (track) {
+                track.stop();
+            });
+            audioRecorder.onstop = function () {
+                var audioBlob = new Blob(audioChunks, {type: 'audio/wav'});
+                var audioURL = URL.createObjectURL(audioBlob);
+                var downloadLink = document.createElement('a');
+                downloadLink.href = audioURL;
+                downloadLink.download = 'positive.wav';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+            };
+        }
+
+        function stopRecording2() {
+            audioRecorder.stop();
+            audioStream.getTracks().forEach(function (track) {
+                track.stop();
+            });
+            audioRecorder.onstop = function () {
+                var audioBlob = new Blob(audioChunks, {type: 'audio/wav'});
+                var audioURL = URL.createObjectURL(audioBlob);
+                var downloadLink = document.createElement('a');
+                downloadLink.href = audioURL;
+                downloadLink.download = 'neutral.wav';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+            };
+        }
+
+        function stopRecording3() {
+            audioRecorder.stop();
+            audioStream.getTracks().forEach(function (track) {
+                track.stop();
+            });
+            audioRecorder.onstop = function () {
+                var audioBlob = new Blob(audioChunks, {type: 'audio/wav'});
+                var audioURL = URL.createObjectURL(audioBlob);
+                var downloadLink = document.createElement('a');
+                downloadLink.href = audioURL;
+                downloadLink.download = 'negative.wav';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+            };
+        }
+
+        function downloadText1() {
+            let text = document.getElementById("input-text1").value;
+            let filename = "positive.txt";
+            let element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function downloadText2() {
+            let text = document.getElementById("input-text2").value;
+            let filename = "neutral.txt";
+            let element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function downloadText3() {
+            let text = document.getElementById("input-text3").value;
+            let filename = "negative.txt";
+            let element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+    </script>
+
+{% endblock %}

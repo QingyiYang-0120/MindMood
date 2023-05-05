@@ -1,0 +1,132 @@
+{% extends "TestBase.html" %}
+
+{% block title %}详细分析{% endblock %}
+
+{% block style %}
+    <style>
+        .container1 {
+            background-color: #faf6f6;
+            padding: 15px 15px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        }
+
+        .left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-left: 15px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 5px;
+            width: 100%;
+        }
+
+    </style>
+{% endblock %}
+{% block content %}
+
+    <div class="container1">
+
+       <div class="left"><img src="{{ url_for('static', filename='detailedresult.png') }}" alt="hero-image"></div>
+
+        <div class="right">
+
+            <div class="card" style="height:175px;">
+                <p class="a25 aR aT"
+                   style="font-size: 18px; padding:20px 20px 10px;font-weight: bold; color:rgb(132, 94, 238); ">
+                    分析1——SDS分数变化
+                </p>
+
+                <h1 class="a25 aR aT a3i" style="font-size: 18px; font-weight: 500; margin-bottom: 20px;">
+                    <p style="font-size:15px;">
+                        （1）<span style="color:#FFB6C1;">x轴</span>:进行抑郁度测评的次数; <span
+                            style="color:#FFB6C1;">y轴</span>:每次测评的SDS评分; 基于此掌握<span style="color:#FFB6C1;">情绪变化状态</span>
+                    </p>
+
+                    <div class="widthsmall2 a2x a1k a1q a1N aF a3j a1t hover:a1u a3k"
+                         style='text-align:center;background-color: #cab6db;text-decoration:none;margin-top:10px;margin-bottom:10px;padding: 10px 10px;border-radius: 8px;'>
+                        基于您语音和文本对应的单模态特征，使用XGBoost和lightgbm模型进行上下限分数预测，并结合抑郁分类模型得到的正常和抑郁的预测概率加权上下限分数得到最终的SDS分数预测。
+                    </div>
+                </h1>
+
+            </div>
+            <div class="card" style="height:160px;">
+                <p class="a25 aR aT"
+                   style="font-size: 18px; padding:20px 20px 10px;font-weight: bold; color:rgb(132, 94, 238);">
+                    分析2——情绪倾向二维化
+                </p>
+
+                <h1 class="a25 aR aT a3i" style="font-size: 18px; font-weight: 500; margin-bottom: 20px;">
+                    <p style="font-size:15px;">
+                        （1）记录历史测试情感倾向的<span style="color:#FFB6C1;">相对分布</span>位置，标有X的部分代表您第i次预测结果为<span
+                            style="color:#FFB6C1;">抑郁</span></p>
+                    <p style="margin-top: 10px;font-size:15px;">
+                        （2）基于此判断<span style="color:#FFB6C1;">患抑郁的风险概率</span>变化（即为距离红色X的簇较近）
+                    </p>
+                    <div class="widthsmall2 a2x a1k a1q a1N aF a3j a1t hover:a1u a3k"
+                         style='text-align:center;background-color: #cab6db;text-decoration:none;margin-top:10px;margin-bottom:10px;padding: 6px 10px;border-radius: 8px;'>
+                        其中，基础对比基准点是同济大学EATD数据集中抑郁与正常样本融合特征的二维形式
+                    </div>
+
+                </h1>
+            </div>
+
+            <div class="card" style="height:125px;">
+                <p class="a25 aR aT"
+                   style="font-size: 18px; padding:20px 20px 10px;font-weight: bold; color:rgb(132, 94, 238); ">
+                    分析3——综合情绪倾向饼图
+                </p>
+
+                <h1 class="a25 aR aT a3i" style="font-size: 18px; font-weight: 500; margin-bottom: 20px;">
+
+                    <p style="font-size:15px;">
+                        （1）您的累计<span style="color:#FFB6C1;">抑郁预测概率</span>的展现
+                        {#                        <img src="{{ url_for('static', filename='img/alg.png') }}" alt="hero-image" class="ah a2f"#}
+                        {#                             style="margin:0px;width:30%;">#}
+                    <div class="widthsmall2 a2x a1k a1q a1N aF a3j a1t hover:a1u a3k"
+                         style='text-align:center;background-color: #cab6db;text-decoration:none;margin-top:10px;margin-bottom:10px;padding: 6px 10px;border-radius: 8px;'>
+                        通过观察饼图，了解自己在历次测试中，大体是属于抑郁还是正常的概率倾向。
+                    </div>
+
+                </h1>
+            </div>
+
+            <div class="card" style="height:145px;">
+                <p class="a25 aR aT"
+                   style="font-size: 18px; padding:20px 20px 10px;font-weight: bold; color:rgb(132, 94, 238);">
+                    分析4——文本词云图
+                </p>
+                {#                            在线录制音频和记录文本Data -> Click here#}
+                <h1 class="a25 aR aT a3i" style="font-size: 18px; font-weight: 500;margin-bottom: 20px;">
+                    <p style="font-size:15px;">
+                        （1）用户历次测试的<span style="color:#FFB6C1;">文本关键字</span>总和展示，词云图以<span
+                            style="color:#FFB6C1;">高频关键词</span>可视化为核心传达文本数据背后的有价值的信息</p>
+                    <div class="widthsmall2 a2x a1k a1q a1N aF a3j a1t hover:a1u a3k"
+                         style='text-align:center;background-color: #cab6db;text-decoration:none;margin-top:10px;margin-bottom:10px;padding: 6px 10px;border-radius: 8px;'>
+                        直观了解历次测试的文字内容,感受自己在语言文字角度体现的情感倾向
+                    </div>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
